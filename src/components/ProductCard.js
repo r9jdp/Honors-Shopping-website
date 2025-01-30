@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
 import {
   Card,
@@ -8,9 +8,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-function ProductCard({product}) {
-    return (
+function ProductCard({ product }) {
+  return (
     <Card className="w-full max-w-sm">
       <CardHeader>
         <CardTitle>{product.title}</CardTitle>
@@ -28,10 +29,12 @@ function ProductCard({product}) {
         <p className="mt-2 text-lg font-bold">${product.price.toFixed(2)}</p>
       </CardContent>
       <CardFooter>
-        <Button className="w-full">View More</Button>
+        <Link href={`/${product.id}`}>
+          <Button className="w-full">View More</Button>
+        </Link>
       </CardFooter>
     </Card>
-    );
+  );
 }
 
 export default ProductCard;
