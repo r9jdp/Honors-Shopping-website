@@ -1,4 +1,13 @@
-import { Calendar, Home, Inbox, Search, Settings, Store } from "lucide-react";
+import {
+  Calendar,
+  ChevronDown,
+  Home,
+  Inbox,
+  Search,
+  Settings,
+  Store,
+  ShoppingCart
+} from "lucide-react";
 
 import {
   Sidebar,
@@ -10,6 +19,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import {
+  CollapsibleTrigger,
+  CollapsibleContent,
+  Collapsible,
+} from "@radix-ui/react-collapsible";
+import { Button } from "@headlessui/react";
 
 const productCategories = [
   "beauty",
@@ -79,5 +94,6 @@ export function AppSidebar({ setProductCategories, productCategories }) {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
+
   );
 }

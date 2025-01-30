@@ -7,6 +7,7 @@ import {
   Package,
   TruckIcon,
   RotateCcw,
+  ArrowLeft 
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,67 +16,8 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
-// const product = {
-//   id: 1,
-//   title: "Essence Mascara Lash Princess",
-//   description:
-//     "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
-//   category: "beauty",
-//   price: 9.99,
-//   discountPercentage: 7.17,
-//   rating: 4.94,
-//   stock: 5,
-//   tags: ["beauty", "mascara"],
-//   brand: "Essence",
-//   sku: "RCH45Q1A",
-//   weight: 2,
-//   dimensions: {
-//     width: 23.17,
-//     height: 14.43,
-//     depth: 28.01,
-//   },
-//   warrantyInformation: "1 month warranty",
-//   shippingInformation: "Ships in 1 month",
-//   availabilityStatus: "Low Stock",
-//   reviews: [
-//     {
-//       rating: 2,
-//       comment: "Very unhappy with my purchase!",
-//       date: "2024-05-23T08:56:21.618Z",
-//       reviewerName: "John Doe",
-//       reviewerEmail: "john.doe@x.dummyjson.com",
-//     },
-//     {
-//       rating: 2,
-//       comment: "Not as described!",
-//       date: "2024-05-23T08:56:21.618Z",
-//       reviewerName: "Nolan Gonzalez",
-//       reviewerEmail: "nolan.gonzalez@x.dummyjson.com",
-//     },
-//     {
-//       rating: 5,
-//       comment: "Very satisfied!",
-//       date: "2024-05-23T08:56:21.618Z",
-//       reviewerName: "Scarlett Wright",
-//       reviewerEmail: "scarlett.wright@x.dummyjson.com",
-//     },
-//   ],
-//   returnPolicy: "30 days return policy",
-//   minimumOrderQuantity: 24,
-//   meta: {
-//     createdAt: "2024-05-23T08:56:21.618Z",
-//     updatedAt: "2024-05-23T08:56:21.618Z",
-//     barcode: "9164035109868",
-//     qrCode: "...",
-//   },
-//   thumbnail: "/placeholder.svg?height=400&width=400",
-//   images: [
-//     "/placeholder.svg?height=400&width=400",
-//     "/placeholder.svg?height=400&width=400",
-//     "/placeholder.svg?height=400&width=400",
-//   ],
-// }
 
 function StarRating({ rating }) {
   // Accept rating as a prop
@@ -97,25 +39,31 @@ function StarRating({ rating }) {
 }
 
 export default function ProductPage({ id }) {
-console.log(id)
+  console.log(id);
   const [product, setProduct] = useState(null);
   useEffect(() => {
-      const fetchProduct = async () => {
-          const response = await axios.get(
-              `https://dummyjson.com/products/${id}`
-      );
+    const fetchProduct = async () => {
+      const response = await axios.get(`https://dummyjson.com/products/${id}`);
       const data = await response.data;
       setProduct(data);
     };
     fetchProduct();
-}, []);
-console.log(product);
-if (!product) return <div>Loading...</div>;
-const discountedPrice =
-  product.price * (1 - product.discountPercentage / 100);
+  }, []);
+  console.log(product);
+  if (!product) return <div>Loading...</div>;
+  const discountedPrice =
+    product.price * (1 - product.discountPercentage / 100);
 
-    return (
-      <div className="container mx-auto py-8">
+  return (
+    <>
+      <div>
+        <Link href="/">
+        <div className="flex items-center text-gray-600 mt-4 ml-8 gap-1 font-bold text-xl">
+        <ArrowLeft/> Home
+        </div>
+        </Link>
+      </div>
+      <div className="container mx-auto px-8 mt-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <div className="aspect-square relative mb-4">
@@ -198,7 +146,7 @@ const discountedPrice =
           </div>
         </div>
         <Separator className="my-8" />
-        <Tabs defaultValue="details" className="w-full">
+        <Tabs defaultValue="details" className="w-full px-8 mb-6">
           <TabsList>
             <TabsTrigger value="details">Product Details</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
@@ -269,6 +217,6 @@ const discountedPrice =
           </TabsContent>
         </Tabs>
       </div>
-    );
-
+    </>
+  );
 }
