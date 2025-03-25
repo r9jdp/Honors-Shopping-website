@@ -6,7 +6,7 @@ import {
   Search,
   Settings,
   Store,
-  ShoppingCart
+  ShoppingCart,
 } from "lucide-react";
 
 import {
@@ -76,7 +76,9 @@ export function AppSidebar({ setProductCategories, productCategories }) {
                   <SidebarMenuButton asChild>
                     <button
                       className={`${
-                        productCategories === item.title ? "bg-slate-600 text-white hover:bg-slate-600 hover:text-white" : null
+                        productCategories === item.title
+                          ? "bg-slate-600 text-white hover:bg-slate-600 hover:text-white"
+                          : null
                       }`}
                       onClick={() => {
                         console.log(item.title);
@@ -94,6 +96,5 @@ export function AppSidebar({ setProductCategories, productCategories }) {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-
   );
 }
